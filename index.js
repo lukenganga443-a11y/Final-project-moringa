@@ -14,7 +14,6 @@ function showOnScroll() {
 window.addEventListener("scroll", showOnScroll);
 showOnScroll();
 
-// smooth page feel (simple trick)
 document.addEventListener("DOMContentLoaded", () => {
   document.body.style.opacity = "1";
 });
