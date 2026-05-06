@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Recipes | RecipeVault</title>
+  <link rel="stylesheet" href="recipe.css">
+</head>
+<body>
+
+<nav>
+  <h2 class="logo" onclick="reloadPage()">RecipeVault</h2>
+
+  <div>
+    <a href="index.html">Home</a>
+    <a href="add-recipe.html">Recipes</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<section class="search">
+  <h1>Search Recipes</h1>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search food...">
+    <button onclick="searchRecipes()" class="btn">Search</button>
+  </div>
+
+  <div id="results"></div>
+</section>
+
+<hr>
+
+<section class="form-section">
+  <h1>Add Your Recipe</h1>
+
+  <form id="recipeForm">
+
+    <input type="text" id="title" placeholder="Recipe name" required>
+
+    <textarea id="ingredients" placeholder="Ingredients" required></textarea>
+
+    <textarea id="steps" placeholder="Steps" required></textarea>
+
+    <button type="submit" class="btn">Save Recipe</button>
+
+  </form>
+</section>
+
+<section class="saved">
+  <h2>My Recipes</h2>
+  <div id="recipeList"></div>
+</section>
+
+<script src="recipe.js"></script>
+</body>
+</html>
