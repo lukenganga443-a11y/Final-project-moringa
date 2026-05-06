@@ -5,7 +5,6 @@ body {
   color: white;
 }
 
-/* PAGE FADE */
 .page-loader {
   position: fixed;
   width: 100%;
@@ -22,7 +21,6 @@ body {
   }
 }
 
-/* NAV */
 nav {
   display: flex;
   justify-content: space-between;
@@ -52,7 +50,6 @@ nav a:hover {
   color: #ff7b3d;
 }
 
-/* HERO BACKGROUND SLIDESHOW */
 .hero {
   height: 85vh;
   display: flex;
@@ -66,7 +63,6 @@ nav a:hover {
   background-position: center;
 }
 
-/* DARK OVERLAY */
 .hero::before {
   content: "";
   position: absolute;
@@ -77,7 +73,6 @@ nav a:hover {
   background: rgba(0,0,0,0.6);
 }
 
-/* IMAGES SLIDESHOW */
 @keyframes bgSwitch {
   0% {
     background-image: url("https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1600&q=80");
@@ -108,7 +103,6 @@ nav a:hover {
   max-width: 500px;
 }
 
-/* BUTTON */
 .btn {
   display: inline-block;
   margin-top: 20px;
@@ -124,7 +118,6 @@ nav a:hover {
   transform: scale(1.05);
 }
 
-/* FEATURES */
 .features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -149,7 +142,6 @@ nav a:hover {
   color: #ff7b3d;
 }
 
-/* FOOTER */
 footer {
   text-align: center;
   padding: 25px;
