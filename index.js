@@ -5,7 +5,6 @@ function reloadPage() {
     location.reload();
   }, 200);
 }
-
 window.addEventListener("load", () => {
   document.body.style.opacity = "1";
 });

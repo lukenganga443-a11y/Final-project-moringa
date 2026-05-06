@@ -60,9 +60,13 @@ nav a:hover {
   align-items: center;
   text-align: center;
   padding: 20px;
-
-  background: radial-gradient(circle at top, #1c1c1c, #0f0f0f);
+  background-color: #111;
+  background-image: url("https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
+
 
 .hero h1 {
   font-size: 50px;
