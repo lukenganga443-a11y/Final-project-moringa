@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+  color: white;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+}
+
+nav .logo {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+nav a:hover {
+  color: #ff6b6b;
+}
+
+nav a.active {
+  color: #ff6b6b;
+}
+
+.hero {
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-size: 55px;
+}
+
+.hero h1 span {
+  color: #ff6b6b;
+}
+
+.hero p {
+  max-width: 600px;
+  opacity: 0.8;
+  margin: 20px 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+}
+
+.btn-primary {
+  background: #ff6b6b;
+}
+
+.btn-primary:hover {
+  background: #ff4b4b;
+}
+
+.btn-secondary {
+  border: 1px solid white;
+}
+
+.btn-secondary:hover {
+  background: white;
+  color: black;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 60px 40px;
+}
+
+.card {
+  background: #1c1c1c;
+  padding: 20px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: #262626;
+}
+
+.card h3 {
+  color: #ff6b6b;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.6;
+}
