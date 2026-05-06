@@ -58,12 +58,19 @@ nav a:hover {
 .meal-card {
   background: #1a1a1a;
   border-radius: 10px;
-  cursor: pointer;
   overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.meal-card:hover {
+  transform: scale(1.03);
 }
 
 .meal-card img {
   width: 100%;
+  height: 150px;
+  object-fit: cover;
 }
 
 .form-section {
@@ -92,4 +99,9 @@ input, textarea {
   padding: 15px;
   margin-top: 10px;
   border-radius: 10px;
+}
+
+button {
+  margin-right: 5px;
+  margin-top: 5px;
 }

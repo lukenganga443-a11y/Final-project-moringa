@@ -1,29 +1,55 @@
 function reloadPage() {
   document.body.style.opacity = "0.2";
   setTimeout(() => location.reload(), 200);
-}
+
+let cache = {};
 
 async function searchRecipes() {
-  const query = document.getElementById("searchInput").value;
-
-  const res = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
-  );
-
-  const data = await res.json();
+  const query = document.getElementById("searchInput").value.trim();
   const results = document.getElementById("results");
 
-  results.innerHTML = "";
+  if (!query) return;
 
-  if (!data.meals) {
+  results.innerHTML = "<p>Loading recipes...</p>";
+
+  if (cache[query]) {
+    renderMeals(cache[query]);
+    return;
+  }
+
+  try {
+    const res = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
+    );
+
+    const data = await res.json();
+
+    cache[query] = data.meals;
+
+    renderMeals(data.meals);
+  } catch (err) {
+    results.innerHTML = "<p>Error loading recipes</p>";
+  }
+}
+
+function renderMeals(meals) {
+  const results = document.getElementById("results");
+
+  if (!meals) {
     results.innerHTML = "<p>No recipes found</p>";
     return;
   }
 
-  data.meals.forEach((meal) => {
+  results.innerHTML = "";
+
+  meals.forEach((meal) => {
     results.innerHTML += `
       <div class="meal-card" onclick="openMeal('${meal.idMeal}')">
-        <img src="${meal.strMealThumb}">
+        <img 
+          src="${meal.strMealThumb}/preview" 
+          loading="lazy"
+          alt="${meal.strMeal}"
+        >
         <p style="padding:10px">${meal.strMeal}</p>
       </div>
     `;
@@ -60,6 +86,7 @@ if (form) {
 
 function displayRecipes() {
   const list = document.getElementById("recipeList");
+
   if (!list) return;
 
   let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
