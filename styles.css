@@ -3,16 +3,17 @@ body {
   font-family: Arial, sans-serif;
   background: #0f0f0f;
   color: white;
-  overflow-x: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-.page-fade {
+.page-loader {
   position: fixed;
   width: 100%;
   height: 100%;
   background: #0f0f0f;
   z-index: 999;
-  animation: fadeOut 0.8s forwards;
+  animation: fadeOut 0.6s forwards;
 }
 
 @keyframes fadeOut {
@@ -31,8 +32,15 @@ nav {
   top: 0;
 }
 
-nav h2 {
+.logo {
   margin: 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logo:hover {
+  color: #ff7b3d;
+  text-shadow: 0 0 10px #ff7b3d;
 }
 
 nav a {
@@ -53,36 +61,17 @@ nav a:hover {
   text-align: center;
   padding: 20px;
 
-  background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.65);
-}
-
-.hero-box {
-  position: relative;
-  max-width: 600px;
-  z-index: 2;
+  background: radial-gradient(circle at top, #1c1c1c, #0f0f0f);
 }
 
 .hero h1 {
-  font-size: 48px;
+  font-size: 50px;
   color: #ff7b3d;
 }
 
 .hero p {
   opacity: 0.8;
-  line-height: 1.6;
+  max-width: 500px;
 }
 
 .btn {
@@ -109,14 +98,14 @@ nav a:hover {
 
 .card {
   background: #1a1a1a;
-  padding: 22px;
+  padding: 20px;
   border-radius: 12px;
   border: 1px solid #222;
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   border-color: #ff7b3d;
 }
 
@@ -133,30 +122,4 @@ footer {
 .small {
   font-size: 12px;
   opacity: 0.5;
-}
-
-.fade {
-  opacity: 0;
-  animation: fadeIn 1s forwards;
-}
-
-.fade:nth-child(2) {
-  animation-delay: 0.3s;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-.slide {
-  opacity: 0;
-  transform: translateY(25px);
-  transition: 0.6s ease;
-}
-
-.slide.show {
-  opacity: 1;
-  transform: translateY(0);
 }

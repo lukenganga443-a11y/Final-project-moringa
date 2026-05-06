@@ -1,21 +1,11 @@
-function showOnScroll() {
-  const cards = document.querySelectorAll(".slide");
+function reloadPage() {
+  document.body.style.opacity = "0.2";
 
-  cards.forEach((card) => {
-    const top = card.getBoundingClientRect().top;
-    const screenHeight = window.innerHeight;
-
-    if (top < screenHeight - 80) {
-      card.classList.add("show");
-    }
-  });
+  setTimeout(() => {
+    location.reload();
+  }, 200);
 }
 
-window.addEventListener("scroll", showOnScroll);
-showOnScroll();
-
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   document.body.style.opacity = "1";
 });
-
-console.log("RecipeVault loaded");
