@@ -1,17 +1,9 @@
-/* =========================
-   GLOBAL
-========================= */
-
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:#f7f7fb;
   color:#222;
 }
-
-/* =========================
-   NAVBAR
-========================= */
 
 nav{
   display:flex;
@@ -61,10 +53,6 @@ nav{
   transform:translateY(-2px);
 }
 
-/* =========================
-   SEARCH SECTION
-========================= */
-
 .search{
   text-align:center;
   padding:50px 20px;
@@ -83,10 +71,6 @@ nav{
   gap:12px;
   flex-wrap:wrap;
 }
-
-/* =========================
-   INPUTS
-========================= */
 
 input,
 textarea{
@@ -115,10 +99,6 @@ textarea:focus{
   box-shadow:0 0 0 4px rgba(255,123,61,0.15);
 }
 
-/* =========================
-   BUTTONS
-========================= */
-
 .btn,
 button{
   background:#ff7b3d;
@@ -139,10 +119,6 @@ button:hover{
   opacity:0.9;
 }
 
-/* =========================
-   FORM SECTION
-========================= */
-
 .form-section{
   padding:60px 20px;
   text-align:center;
@@ -161,10 +137,6 @@ button:hover{
   flex-wrap:wrap;
 }
 
-/* =========================
-   RESULTS + SAVED GRID
-========================= */
-
 #results,
 #recipeList{
   display:grid;
@@ -173,10 +145,6 @@ button:hover{
 
   padding:30px;
 }
-
-/* =========================
-   CARD
-========================= */
 
 .card{
   background:white;
@@ -195,10 +163,6 @@ button:hover{
   box-shadow:0 14px 30px rgba(0,0,0,0.14);
 }
 
-/* =========================
-   IMAGE
-========================= */
-
 .card img{
   width:100%;
   height:220px;
@@ -207,14 +171,9 @@ button:hover{
   transition:0.4s;
 }
 
-/* IMAGE HOVER EFFECT */
 .card:hover img{
   transform:scale(1.08);
 }
-
-/* =========================
-   CARD CONTENT
-========================= */
 
 .card-content{
   padding:18px;
@@ -229,9 +188,6 @@ button:hover{
   line-height:1.5;
 }
 
-/* =========================
-   SAVED SECTION
-========================= */
 
 .saved{
   padding:40px 20px;
@@ -243,9 +199,6 @@ button:hover{
   color:#ff7b3d;
 }
 
-/* =========================
-   TOAST
-========================= */
 
 .toast{
   position:fixed;
@@ -274,9 +227,6 @@ button:hover{
   transform:translateX(-50%) translateY(-10px);
 }
 
-/* =========================
-   ANIMATION
-========================= */
 
 @keyframes fadeUp{
 
@@ -292,9 +242,6 @@ button:hover{
 
 }
 
-/* =========================
-   MOBILE
-========================= */
 
 @media(max-width:768px){
 
