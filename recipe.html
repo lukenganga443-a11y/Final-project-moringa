@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recipes | RecipeVault</title>
-  <link rel="stylesheet" href="recipe.css">
+  <link rel="stylesheet" href="recipes.css">
 </head>
 <body>
 
 <nav>
   <h2 class="logo" onclick="reloadPage()">RecipeVault</h2>
 
-  <div>
+  <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="add-recipe.html">Recipes</a>
+    <a href="favorites.html">Favorites</a>
     <a href="about.html">About</a>
   </div>
 </nav>
@@ -20,7 +22,7 @@
   <h1>Search Recipes</h1>
 
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search food...">
+    <input type="text" id="searchInput" placeholder="Search meals...">
     <button onclick="searchRecipes()" class="btn">Search</button>
   </div>
 
@@ -33,10 +35,15 @@
   <h1>Add Your Recipe</h1>
 
   <form id="recipeForm">
+
     <input type="text" id="title" placeholder="Recipe name" required>
+
     <textarea id="ingredients" placeholder="Ingredients" required></textarea>
+
     <textarea id="steps" placeholder="Steps" required></textarea>
-    <button class="btn">Save Recipe</button>
+
+    <button type="submit" class="btn">Save Recipe</button>
+
   </form>
 </section>
 
@@ -45,6 +52,6 @@
   <div id="recipeList"></div>
 </section>
 
-<script src="recipe.js"></script>
+<script src="recipes.js"></script>
 </body>
 </html>
