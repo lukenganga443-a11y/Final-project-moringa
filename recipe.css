@@ -1,4 +1,9 @@
 body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#fffaf5;
+  color:#222;
+}
 
 nav{
   display:flex;
@@ -7,6 +12,9 @@ nav{
   padding:18px 30px;
   background:white;
   border-bottom:1px solid #eee;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
 .logo{
@@ -18,45 +26,129 @@ nav{
   margin-left:15px;
   text-decoration:none;
   color:#444;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:#ff7b3d;
 }
 
 #mealDetails{
-  max-width:900px;
+  max-width:1000px;
   margin:auto;
-  padding:30px 20px;
+  padding:40px 20px;
 }
 
 .recipe-container{
   background:white;
-  border-radius:14px;
+  border-radius:16px;
   overflow:hidden;
   box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  animation:fadeIn 0.5s ease;
 }
 
 .recipe-container img{
   width:100%;
-  max-height:450px;
+  max-height:500px;
   object-fit:cover;
 }
 
 .recipe-content{
-  padding:25px;
+  padding:30px;
 }
 
 .recipe-content h1{
   color:#ff7b3d;
+  margin-top:0;
+  font-size:42px;
+}
+
+.recipe-meta{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
+
+.meta-box{
+  background:#fff1e8;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:bold;
 }
 
 .instructions{
-  line-height:1.8;
+  line-height:1.9;
+  color:#444;
+  margin-top:15px;
+}
+
+.ingredients{
+  margin-top:35px;
+}
+
+.ingredients h2{
+  color:#ff7b3d;
+}
+
+.ingredients ul{
+  padding-left:20px;
+}
+
+.ingredients li{
+  margin-bottom:10px;
+  line-height:1.6;
 }
 
 .video-btn{
   display:inline-block;
-  margin-top:20px;
-  padding:12px 18px;
+  margin-top:25px;
+  padding:14px 20px;
   background:#ff7b3d;
   color:white;
   text-decoration:none;
   border-radius:8px;
+  transition:0.3s;
+}
+
+.video-btn:hover{
+  transform:translateY(-2px);
+  opacity:0.9;
+}
+
+.loading{
+  text-align:center;
+  margin-top:120px;
+  color:#666;
+}
+
+@keyframes fadeIn{
+
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+@media(max-width:700px){
+
+  nav{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .recipe-content h1{
+    font-size:32px;
+  }
+
+  .recipe-meta{
+    flex-direction:column;
+  }
+
 }
