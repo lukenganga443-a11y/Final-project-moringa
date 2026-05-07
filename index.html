@@ -1,57 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <title>RecipeVault</title>
+
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-<div class="page-loader"></div>
-
 <nav>
-  <h2 class="logo" onclick="reloadPage()">RecipeVault</h2>
 
-  <div>
+  <h2 class="logo" onclick="reloadPage()">
+    RecipeVault
+  </h2>
+
+  <div class="nav-links">
+
     <a href="index.html">Home</a>
     <a href="add-recipe.html">Recipes</a>
-    <a href="about.html">About</a>
+    <a href="favorites.html">Favorites</a>
+    <a href="about.html">About Us</a>
+
   </div>
+
 </nav>
 
 <section class="hero">
+
   <div class="hero-box">
-    <h1>RecipeVault</h1>
-    <p>Explore food ideas and discover new recipes every day.</p>
-    <a href="add-recipe.html" class="btn">Get Started</a>
+
+    <h1>Discover & Share Recipes</h1>
+
+    <p>
+      Search meals, explore global dishes, and save your favorites
+      all in one simple cooking platform.
+    </p>
+
+    <a href="add-recipe.html" class="btn">
+      Get Started
+    </a>
+
   </div>
+
 </section>
 
 <section class="trending">
+
   <h2>Trending Recipes</h2>
-  <div id="trendingResults"></div>
-</section>
 
-<section class="features">
-
-  <div class="card">
-    <h3>Search Recipes</h3>
-    <p>Find meals instantly.</p>
-  </div>
-
-  <div class="card">
-    <h3>Food Ideas</h3>
-    <p>Get inspiration for cooking.</p>
-  </div>
-
-  <div class="card">
-    <h3>Save Recipes</h3>
-    <p>Keep your favourites.</p>
-  </div>
+  <div id="trendingRecipes"></div>
 
 </section>
 
 <footer>
+
   <p>© 2026 RecipeVault</p>
+
+  <p class="small">
+    Final Project • Food Discovery App
+  </p>
+
 </footer>
 
 <script src="index.js"></script>
