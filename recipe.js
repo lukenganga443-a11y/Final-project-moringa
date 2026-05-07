@@ -1,16 +1,29 @@
 function reloadPage() {
-  document.body.style.opacity = "0.2";
-  setTimeout(() => location.reload(), 200);
+  location.reload();
+}
+
+document
+  .getElementById("searchInput")
+  .addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      searchRecipes();
+    }
+  });
 
 let cache = {};
 
 async function searchRecipes() {
   const query = document.getElementById("searchInput").value.trim();
+
   const results = document.getElementById("results");
 
   if (!query) return;
 
-  results.innerHTML = "<p>Loading recipes...</p>";
+  results.innerHTML = `
+    <p style="text-align:center">
+      Loading recipes...
+    </p>
+  `;
 
   if (cache[query]) {
     renderMeals(cache[query]);
@@ -27,8 +40,10 @@ async function searchRecipes() {
     cache[query] = data.meals;
 
     renderMeals(data.meals);
-  } catch (err) {
-    results.innerHTML = "<p>Error loading recipes</p>";
+  } catch (error) {
+    results.innerHTML = `
+      <p>Error loading recipes.</p>
+    `;
   }
 }
 
@@ -36,7 +51,9 @@ function renderMeals(meals) {
   const results = document.getElementById("results");
 
   if (!meals) {
-    results.innerHTML = "<p>No recipes found</p>";
+    results.innerHTML = `
+      <p>No recipes found.</p>
+    `;
     return;
   }
 
@@ -44,21 +61,54 @@ function renderMeals(meals) {
 
   meals.forEach((meal) => {
     results.innerHTML += `
-      <div class="meal-card" onclick="openMeal('${meal.idMeal}')">
-        <img 
-          src="${meal.strMealThumb}/preview" 
+      <div class="meal-card">
+
+        <img
+          src="${meal.strMealThumb}/preview"
           loading="lazy"
-          alt="${meal.strMeal}"
         >
-        <p style="padding:10px">${meal.strMeal}</p>
+
+        <div class="meal-info">
+
+          <h3>${meal.strMeal}</h3>
+
+          <p class="category">
+            ${meal.strCategory}
+          </p>
+
+          <p>
+            ${meal.strArea} Cuisine
+          </p>
+
+          <button
+            class="favorite-btn"
+            onclick='addFavorite(${JSON.stringify(meal)})'
+          >
+             Add to Favorites
+          </button>
+
+        </div>
+
       </div>
     `;
   });
 }
 
-function openMeal(id) {
-  localStorage.setItem("selectedMeal", id);
-  window.location.href = "recipe.html";
+function addFavorite(meal) {
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  const exists = favorites.some((f) => f.idMeal === meal.idMeal);
+
+  if (exists) {
+    alert("Already added");
+    return;
+  }
+
+  favorites.push(meal);
+
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+
+  alert("Added to favorites");
 }
 
 const form = document.getElementById("recipeForm");
@@ -69,17 +119,19 @@ if (form) {
 
     let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
 
-    const newRecipe = {
+    const recipe = {
       id: Date.now(),
       title: title.value,
       ingredients: ingredients.value,
       steps: steps.value,
     };
 
-    recipes.push(newRecipe);
+    recipes.push(recipe);
+
     localStorage.setItem("recipes", JSON.stringify(recipes));
 
     form.reset();
+
     displayRecipes();
   });
 }
@@ -89,19 +141,23 @@ function displayRecipes() {
 
   if (!list) return;
 
-  let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
-
   list.innerHTML = "";
+
+  let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
 
   recipes.forEach((r) => {
     list.innerHTML += `
       <div class="recipe-card">
         <h3>${r.title}</h3>
         <p>${r.ingredients}</p>
-        <p>${r.steps}</p>
 
-        <button onclick="deleteRecipe(${r.id})">Delete</button>
-        <button onclick="editRecipe(${r.id})">Edit</button>
+        <button onclick="deleteRecipe(${r.id})">
+          Delete
+        </button>
+
+        <button onclick="editRecipe(${r.id})">
+          Edit
+        </button>
       </div>
     `;
   });
@@ -113,6 +169,7 @@ function deleteRecipe(id) {
   recipes = recipes.filter((r) => r.id !== id);
 
   localStorage.setItem("recipes", JSON.stringify(recipes));
+
   displayRecipes();
 }
 
