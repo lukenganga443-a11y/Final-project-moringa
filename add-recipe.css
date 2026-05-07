@@ -1,218 +1,271 @@
+/* =========================
+   GLOBAL
+========================= */
+
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:#fffaf5;
+  background:#f7f7fb;
   color:#222;
 }
 
+/* =========================
+   NAVBAR
+========================= */
+
 nav{
   display:flex;
-  justify-content:space-between;
+  flex-direction:column;
   align-items:center;
-  padding:18px 30px;
-  background:white;
-  border-bottom:1px solid #eee;
+  justify-content:center;
+
+  padding:18px;
+
   position:sticky;
   top:0;
   z-index:100;
+
+  background:rgba(255,255,255,0.8);
+  backdrop-filter:blur(10px);
+
+  border-bottom:1px solid #eee;
 }
 
 .logo{
-  cursor:pointer;
   color:#ff7b3d;
+  cursor:pointer;
+  margin-bottom:10px;
+
+  transition:0.3s;
+}
+
+.logo:hover{
+  transform:scale(1.05);
+}
+
+.nav-links{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
 }
 
 .nav-links a{
-  margin-left:15px;
   text-decoration:none;
   color:#444;
+  font-weight:500;
   transition:0.3s;
 }
 
 .nav-links a:hover{
   color:#ff7b3d;
+  transform:translateY(-2px);
 }
+
+/* =========================
+   SEARCH SECTION
+========================= */
 
 .search{
   text-align:center;
-  padding:40px 20px;
+  padding:50px 20px;
 }
 
 .search h1{
-  font-size:40px;
+  font-size:42px;
+  margin-bottom:25px;
+  color:#ff7b3d;
 }
 
 .search-box{
   display:flex;
   justify-content:center;
-  gap:10px;
-  margin-top:20px;
+  align-items:center;
+  gap:12px;
   flex-wrap:wrap;
 }
 
-.search-box input{
-  padding:14px;
-  width:300px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  font-size:15px;
-}
-
-.btn{
-  padding:14px 20px;
-  border:none;
-  border-radius:8px;
-  background:#ff7b3d;
-  cursor:pointer;
-  transition:0.3s;
-  color:white;
-  font-weight:bold;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-  opacity:0.9;
-}
-
-#results{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:20px;
-  padding:40px 10px;
-}
-
-.meal-card{
-  background:white;
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
-  transition:0.3s;
-}
-
-.meal-card:hover{
-  transform:translateY(-5px);
-}
-
-.meal-card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-}
-
-.meal-info{
-  padding:15px;
-}
-
-.meal-info h3{
-  margin-top:0;
-}
-
-.category{
-  color:#ff7b3d;
-  font-size:13px;
-  margin-bottom:8px;
-}
-
-.instructions{
-  font-size:14px;
-  line-height:1.6;
-  color:#555;
-}
-
-.favorite-btn{
-  margin-top:15px;
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:8px;
-  background:#ff7b3d;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.favorite-btn:hover{
-  opacity:0.9;
-}
-
-.form-section{
-  padding:40px 20px;
-  text-align:center;
-}
-
-form{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  max-width:500px;
-  margin:auto;
-}
+/* =========================
+   INPUTS
+========================= */
 
 input,
 textarea{
   padding:14px;
   border:1px solid #ddd;
-  border-radius:8px;
+  border-radius:12px;
+  outline:none;
   font-size:15px;
+
+  transition:0.3s;
+}
+
+input{
+  width:260px;
 }
 
 textarea{
-  min-height:140px;
+  width:300px;
+  height:130px;
   resize:none;
 }
+
+input:focus,
+textarea:focus{
+  border-color:#ff7b3d;
+  box-shadow:0 0 0 4px rgba(255,123,61,0.15);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn,
+button{
+  background:#ff7b3d;
+  color:white;
+  border:none;
+  padding:13px 20px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:500;
+
+  transition:0.3s;
+}
+
+.btn:hover,
+button:hover{
+  transform:translateY(-3px);
+  opacity:0.9;
+}
+
+/* =========================
+   FORM SECTION
+========================= */
+
+.form-section{
+  padding:60px 20px;
+  text-align:center;
+}
+
+.form-section h1{
+  margin-bottom:30px;
+  color:#ff7b3d;
+}
+
+#recipeForm{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+/* =========================
+   RESULTS + SAVED GRID
+========================= */
+
+#results,
+#recipeList{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+
+  padding:30px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+
+  transition:0.35s;
+
+  animation:fadeUp 0.6s ease;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 14px 30px rgba(0,0,0,0.14);
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+
+  transition:0.4s;
+}
+
+/* IMAGE HOVER EFFECT */
+.card:hover img{
+  transform:scale(1.08);
+}
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.card-content{
+  padding:18px;
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#666;
+  line-height:1.5;
+}
+
+/* =========================
+   SAVED SECTION
+========================= */
 
 .saved{
   padding:40px 20px;
 }
 
-.recipe-card{
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
-  margin-top:15px;
+.saved h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:#ff7b3d;
 }
 
-.recipe-card button{
-  margin-right:10px;
-  margin-top:10px;
-  padding:10px 14px;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  background:#ff7b3d;
-  color:white;
-}
-
-@media(max-width:700px){
-
-  nav{
-    flex-direction:column;
-    gap:10px;
-  }
-
-  .search-box input{
-    width:100%;
-  }
-
-  #results{
-    grid-template-columns:1fr;
-  }
-
-}
+/* =========================
+   TOAST
+========================= */
 
 .toast{
   position:fixed;
   bottom:30px;
   left:50%;
+
   transform:translateX(-50%);
-  padding:12px 20px;
-  border-radius:8px;
+
+  padding:14px 20px;
+
+  border-radius:10px;
+
+  background:#333;
   color:white;
-  font-size:14px;
+
   opacity:0;
   pointer-events:none;
-  transition:0.4s ease;
+
+  transition:0.4s;
+
   z-index:9999;
 }
 
@@ -221,35 +274,43 @@ textarea{
   transform:translateX(-50%) translateY(-10px);
 }
 
-.toast.success{
-  background:#28a745;
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes fadeUp{
+
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
 }
 
-.toast.error{
-  background:#dc3545;
-}
+/* =========================
+   MOBILE
+========================= */
 
-.toast.warning{
-  background:#ff9800;
-}.toast{
-  position:fixed;
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:12px 20px;
-  border-radius:8px;
-  color:white;
-  opacity:0;
-  transition:0.3s;
-  pointer-events:none;
-  z-index:9999;
-}
+@media(max-width:768px){
 
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(-10px);
-}
+  .search h1,
+  .form-section h1{
+    font-size:32px;
+  }
 
-.toast.success{ background:#28a745; }
-.toast.warning{ background:#ff9800; }
-.toast.error{ background:#dc3545; }
+  input,
+  textarea{
+    width:100%;
+  }
+
+  #recipeForm{
+    flex-direction:column;
+    align-items:center;
+  }
+
+}
