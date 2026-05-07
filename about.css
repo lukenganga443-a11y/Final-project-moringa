@@ -1,0 +1,184 @@
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#fffaf5;
+  color:#222;
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 30px;
+  background:white;
+  border-bottom:1px solid #eee;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  cursor:pointer;
+  color:#ff7b3d;
+}
+
+.nav-links a{
+  margin-left:15px;
+  text-decoration:none;
+  color:#444;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:#ff7b3d;
+}
+
+.hero{
+  text-align:center;
+  padding:80px 20px;
+  background:linear-gradient(to right,#fff3eb,#ffe3d3);
+}
+
+.hero h1{
+  font-size:48px;
+  margin-bottom:10px;
+  color:#ff7b3d;
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  line-height:1.8;
+  color:#555;
+}
+
+.food-info{
+  padding:60px 20px;
+  text-align:center;
+}
+
+.food-info h2{
+  color:#ff7b3d;
+}
+
+.food-info p{
+  max-width:800px;
+  margin:auto;
+  line-height:1.8;
+  color:#555;
+}
+
+.delicacies{
+  padding:60px 20px;
+}
+
+.delicacies h2{
+  text-align:center;
+  margin-bottom:30px;
+  color:#ff7b3d;
+}
+
+.food-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+
+.food-card{
+  background:white;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.food-card:hover{
+  transform:translateY(-5px);
+}
+
+.food-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.food-card h3{
+  padding:15px 15px 0;
+}
+
+.food-card p{
+  padding:0 15px 20px;
+  color:#555;
+  line-height:1.6;
+}
+
+.contact{
+  padding:60px 20px;
+  text-align:center;
+}
+
+.contact p{
+  color:#666;
+}
+
+form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  max-width:500px;
+  margin:30px auto 0;
+}
+
+input,
+textarea{
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:15px;
+}
+
+textarea{
+  min-height:150px;
+  resize:none;
+}
+
+.btn{
+  padding:14px;
+  border:none;
+  border-radius:8px;
+  background:#ff7b3d;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:bold;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  opacity:0.9;
+}
+
+footer{
+  text-align:center;
+  padding:30px 20px;
+  background:white;
+  border-top:1px solid #eee;
+}
+
+.small{
+  color:#777;
+  font-size:14px;
+}
+
+@media(max-width:700px){
+
+  nav{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+}
