@@ -20,7 +20,7 @@ async function searchRecipes() {
   if (!query) return;
 
   results.innerHTML = `
-    <p style="text-align:center">
+    <p style="text-align:center;">
       Loading recipes...
     </p>
   `;
@@ -54,6 +54,7 @@ function renderMeals(meals) {
     results.innerHTML = `
       <p>No recipes found.</p>
     `;
+
     return;
   }
 
@@ -61,7 +62,11 @@ function renderMeals(meals) {
 
   meals.forEach((meal) => {
     results.innerHTML += `
-      <div class="meal-card">
+
+      <div
+        class="meal-card"
+        onclick="openMeal('${meal.idMeal}')"
+      >
 
         <img
           src="${meal.strMealThumb}/preview"
@@ -80,18 +85,29 @@ function renderMeals(meals) {
             ${meal.strArea} Cuisine
           </p>
 
+          <p class="instructions">
+            ${meal.strInstructions.slice(0, 120)}...
+          </p>
+
           <button
             class="favorite-btn"
-            onclick='addFavorite(${JSON.stringify(meal)})'
+            onclick='addFavorite(${JSON.stringify(meal)});event.stopPropagation();'
           >
-             Add to Favorites
+            ❤️ Add to Favorites
           </button>
 
         </div>
 
       </div>
+
     `;
   });
+}
+
+function openMeal(id) {
+  localStorage.setItem("selectedMeal", id);
+
+  window.location.href = "recipe.html";
 }
 
 function addFavorite(meal) {
@@ -148,16 +164,31 @@ function displayRecipes() {
   recipes.forEach((r) => {
     list.innerHTML += `
       <div class="recipe-card">
-        <h3>${r.title}</h3>
-        <p>${r.ingredients}</p>
 
-        <button onclick="deleteRecipe(${r.id})">
+        <h3>${r.title}</h3>
+
+        <p>
+          <strong>Ingredients:</strong>
+          ${r.ingredients}
+        </p>
+
+        <p>
+          <strong>Steps:</strong>
+          ${r.steps}
+        </p>
+
+        <button
+          onclick="deleteRecipe(${r.id})"
+        >
           Delete
         </button>
 
-        <button onclick="editRecipe(${r.id})">
+        <button
+          onclick="editRecipe(${r.id})"
+        >
           Edit
         </button>
+
       </div>
     `;
   });
@@ -179,7 +210,9 @@ function editRecipe(id) {
   let recipe = recipes.find((r) => r.id === id);
 
   title.value = recipe.title;
+
   ingredients.value = recipe.ingredients;
+
   steps.value = recipe.steps;
 
   deleteRecipe(id);
