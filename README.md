@@ -12,7 +12,7 @@ Anthony Ng'ang'a
 ## Live Demo
 If deployed with GitHub Pages:
 
-https://your-username.github.io/recipevault/
+https://lukenganga443-a11y.github.io/Final-project-moringa/
 
 ---
 
