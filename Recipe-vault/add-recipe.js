@@ -1,34 +1,26 @@
-function reloadPage() {
-  location.reload();
+const toast = document.createElement("div");
+toast.className = "toast";
+document.body.appendChild(toast);
+
+function showToast(message, type = "success") {
+  toast.textContent = message;
+  toast.className = `toast show ${type}`;
+
+  setTimeout(() => {
+    toast.className = "toast";
+  }, 2500);
 }
 
-document
-  .getElementById("searchInput")
-  .addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-      searchRecipes();
-    }
-  });
-
-let cache = {};
-
 async function searchRecipes() {
-  const query = document.getElementById("searchInput").value.trim();
-
+  const query = document.getElementById("searchInput").value;
   const results = document.getElementById("results");
 
-  if (!query) return;
-
-  results.innerHTML = `
-    <p style="text-align:center;">
-      Loading recipes...
-    </p>
-  `;
-
-  if (cache[query]) {
-    renderMeals(cache[query]);
+  if (!query) {
+    showToast("Type something to search ⚠️", "warning");
     return;
   }
+
+  results.innerHTML = "Loading...";
 
   try {
     const res = await fetch(
@@ -37,86 +29,40 @@ async function searchRecipes() {
 
     const data = await res.json();
 
-    cache[query] = data.meals;
+    if (!data.meals) {
+      results.innerHTML = "No recipes found.";
+      return;
+    }
 
-    renderMeals(data.meals);
-  } catch (error) {
-    results.innerHTML = `
-      <p>Error loading recipes.</p>
-    `;
-  }
-}
+    results.innerHTML = "";
 
-function renderMeals(meals) {
-  const results = document.getElementById("results");
+    data.meals.forEach((meal) => {
+      results.innerHTML += `
+        <div class="card">
 
-  if (!meals) {
-    results.innerHTML = `
-      <p>No recipes found.</p>
-    `;
-
-    return;
-  }
-
-  results.innerHTML = "";
-
-  meals.forEach((meal) => {
-    results.innerHTML += `
-
-      <div
-        class="meal-card"
-        onclick="openMeal('${meal.idMeal}')"
-      >
-
-        <img
-          src="${meal.strMealThumb}/preview"
-          loading="lazy"
-        >
-
-        <div class="meal-info">
+          <img src="${meal.strMealThumb}" />
 
           <h3>${meal.strMeal}</h3>
 
-          <p class="category">
-            ${meal.strCategory}
-          </p>
-
-          <p>
-            ${meal.strArea} Cuisine
-          </p>
-
-          <p class="instructions">
-            ${meal.strInstructions.slice(0, 120)}...
-          </p>
-
-          <button
-            class="favorite-btn"
-            onclick='addFavorite(${JSON.stringify(meal)});event.stopPropagation();'
-          >
-            ❤️ Add to Favorites
+          <button onclick='addToFavorites(${JSON.stringify(meal)})'>
+            Add to Favorites
           </button>
 
         </div>
-
-      </div>
-
-    `;
-  });
+      `;
+    });
+  } catch (err) {
+    results.innerHTML = "Error loading recipes.";
+  }
 }
 
-function openMeal(id) {
-  localStorage.setItem("selectedMeal", id);
-
-  window.location.href = "recipe.html";
-}
-
-function addFavorite(meal) {
+function addToFavorites(meal) {
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-  const exists = favorites.some((f) => f.idMeal === meal.idMeal);
+  const exists = favorites.find((item) => item.idMeal === meal.idMeal);
 
   if (exists) {
-    alert("Already added");
+    showToast("Already in favorites ⚠️", "warning");
     return;
   }
 
@@ -124,98 +70,61 @@ function addFavorite(meal) {
 
   localStorage.setItem("favorites", JSON.stringify(favorites));
 
-  alert("Added to favorites");
+  showToast("Added to favorites ❤️", "success");
 }
 
 const form = document.getElementById("recipeForm");
 
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-    let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+  let recipes = JSON.parse(localStorage.getItem("myRecipes")) || [];
 
-    const recipe = {
-      id: Date.now(),
-      title: title.value,
-      ingredients: ingredients.value,
-      steps: steps.value,
-    };
+  const newRecipe = {
+    id: Date.now(),
+    title: document.getElementById("title").value,
+    ingredients: document.getElementById("ingredients").value,
+    steps: document.getElementById("steps").value,
+  };
 
-    recipes.push(recipe);
+  recipes.push(newRecipe);
 
-    localStorage.setItem("recipes", JSON.stringify(recipes));
+  localStorage.setItem("myRecipes", JSON.stringify(recipes));
 
-    form.reset();
+  showToast("Recipe saved successfully 🍲", "success");
 
-    displayRecipes();
-  });
-}
+  form.reset();
+
+  displayRecipes();
+});
+
 
 function displayRecipes() {
   const list = document.getElementById("recipeList");
 
-  if (!list) return;
+  let recipes = JSON.parse(localStorage.getItem("myRecipes")) || [];
+
+  if (recipes.length === 0) {
+    list.innerHTML = "<p>No recipes saved yet.</p>";
+    return;
+  }
 
   list.innerHTML = "";
 
-  let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
-
   recipes.forEach((r) => {
     list.innerHTML += `
-      <div class="recipe-card">
+      <div class="card">
 
         <h3>${r.title}</h3>
 
-        <p>
-          <strong>Ingredients:</strong>
-          ${r.ingredients}
-        </p>
+        <p><b>Ingredients:</b> ${r.ingredients}</p>
 
-        <p>
-          <strong>Steps:</strong>
-          ${r.steps}
-        </p>
-
-        <button
-          onclick="deleteRecipe(${r.id})"
-        >
-          Delete
-        </button>
-
-        <button
-          onclick="editRecipe(${r.id})"
-        >
-          Edit
-        </button>
+        <p><b>Steps:</b> ${r.steps}</p>
 
       </div>
     `;
   });
 }
 
-function deleteRecipe(id) {
-  let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
-
-  recipes = recipes.filter((r) => r.id !== id);
-
-  localStorage.setItem("recipes", JSON.stringify(recipes));
-
-  displayRecipes();
-}
-
-function editRecipe(id) {
-  let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
-
-  let recipe = recipes.find((r) => r.id === id);
-
-  title.value = recipe.title;
-
-  ingredients.value = recipe.ingredients;
-
-  steps.value = recipe.steps;
-
-  deleteRecipe(id);
-}
 
 displayRecipes();
